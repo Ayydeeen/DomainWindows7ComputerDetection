@@ -6,7 +6,7 @@ function Get-LoggedOnUser {
    [CmdletBinding()]
    param (
      [Parameter()]
-     [ValidateScript({ Test-Connection -ComputerName $_ -Quiet -Count 1 })]
+     [ValidateScript({ Test-Connection -ComputerName $_ -Quiet -Count 3 })]
      [ValidateNotNullOrEmpty()]
      [string[]]$ComputerName = $env:COMPUTERNAME
    )
@@ -38,5 +38,5 @@ foreach ($computer in $computers1) {
 
   #Append info to win7.csv file in current directory
   $out = write-output (New-Object -Typename PSObject -Property $properties)
-  add-content -Path win7.csv -Value $out 
+  add-content -Path win7.txt -Value $out 
 };
