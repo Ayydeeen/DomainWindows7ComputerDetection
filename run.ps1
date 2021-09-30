@@ -39,13 +39,9 @@ foreach ($comp in $RawPC) {
         if ($lastuserlogoninfo.SID) {$SecIdentifier = New-Object System.Security.Principal.SecurityIdentifier($lastuserlogoninfo.SID)}
         if (!$username) { $username = $SecIdentifier.Translate([System.Security.Principal.NTAccount]) }
 
-        $properties = @{
-            'Computer'=$pcinfo.Computer;
-            'LastLogon'=$pcinfo.Lastlogon;
-            'User'=$username.value
-        }
-        $out = write-output (New-Object -Typename PSObject -Property $properties)
-        add-content -Path win7.txt -Value $out 
+
+        $out = write-output ($pcinfo.Computer + "," + $pcinfo.Lastlogon + "," + $username.value)
+        add-content -Path win7.csv -Value $out 
     }
 }
 
